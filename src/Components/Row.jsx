@@ -2,18 +2,44 @@ import React, { useEffect, useState } from "react";
 import instance from "../utils/axios";
 import { useQuery } from "react-query";
 import useFetch from "../hooks/useFetch";
+import YouTube from "react-youtube";
+import movieTrailer from "movie-trailer";
 
 const BASE_URL = "https://image.tmdb.org/t/p/original/";
 
 const Row = ({ title, fetchURL, isLargeRow }) => {
   const [movies, setMovies] = useState([]);
-
+  const [trailerURL, setTrailerURL] = useState("");
+  console.log(trailerURL);
+  console.log(movies);
   const onSuccess = (data) => {
     setMovies(data.data.results);
   };
+  const data = useFetch(fetchURL, onSuccess);
 
-  const  data  = useFetch(fetchURL,onSuccess);
- 
+  const opts = {
+    height: "390",
+    width: "100%",
+    playerVars: {
+      autoplay: 1,
+    },
+  };
+  const handleMovieClick = (movie) => {
+    if (trailerURL) {
+      setTrailerURL("");
+    } else {
+      movieTrailer(movie?.name || "")
+        .then((url) => {
+          // https://www.youtube.com/watch?v=XtMThy8QKqU
+          window.alert(url);
+          const urlParams = new URLSearchParams(new URL(url).search);
+          setTrailerURL(urlParams.get("v"));
+        })
+        .catch((error) => {
+          window.alert(error);
+        });
+    }
+  };
 
   return (
     <section className="">
@@ -22,6 +48,7 @@ const Row = ({ title, fetchURL, isLargeRow }) => {
         {movies?.map((movie) => (
           <img
             key={movie.id}
+            onClick={() => handleMovieClick(movie)}
             src={`${BASE_URL}${
               isLargeRow ? movie.poster_path : movie.backdrop_path
             }`}
@@ -32,6 +59,7 @@ const Row = ({ title, fetchURL, isLargeRow }) => {
           />
         ))}
       </div>
+      {trailerURL && <YouTube videoId={trailerURL} opts={opts} />}
     </section>
   );
 };

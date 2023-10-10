@@ -4,7 +4,6 @@ import { requests } from "../utils/data";
 
 const Bannar = () => {
   const [movie, setMovie] = useState({});
-  console.log(movie);
   const onSuccess = (data) => {
     setMovie(
       data.data.results[
@@ -18,8 +17,10 @@ const Bannar = () => {
     <section
       style={{
         backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie.backdrop_path}")`,
+        backgroundPosition: "center center",
+        // backgroundRepeat : "no-repeat",
+        // backgroundSize: "100%",
+        backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
       }}
       className="h-[535px] object-contain text-gray-100 flex flex-col justify-end"
     >

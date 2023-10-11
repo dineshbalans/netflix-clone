@@ -9,7 +9,7 @@ export default function App() {
       <NavBar />
       <section className="container mx-auto ">
         <Bannar />
-        <div className="px-5">
+        <div className="px-3 sml:px-5">
           {requests.map(({ id, title, URL }, index) => (
             <Row
               key={id}

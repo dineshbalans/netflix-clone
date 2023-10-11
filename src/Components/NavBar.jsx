@@ -14,7 +14,7 @@ const NavBar = () => {
   return (
     <nav
       className={`w-full fixed z-50 top-0 ${
-        show ? "bg-[#111]" : "bg-gradient-to-b from-[#111]"
+        show ? "bg-[#111]" : ""
       } duration-500 ease-in`}
     >
       <div className="container mx-auto flex justify-between p-5">

@@ -7,7 +7,7 @@ const useFetch = (fetchURL, onSuccess) => {
     return await instance.get(fetchURL);
   };
 
-  const {data} = useQuery("fetchMoviesData", movieFetcher, {
+  const { data } = useQuery("fetchMoviesData", movieFetcher, {
     onSuccess,
     onError: (error) => {
       window.alert(error);

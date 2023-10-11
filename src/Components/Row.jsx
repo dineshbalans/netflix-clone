@@ -10,8 +10,8 @@ const BASE_URL = "https://image.tmdb.org/t/p/original/";
 const Row = ({ title, fetchURL, isLargeRow }) => {
   const [movies, setMovies] = useState([]);
   const [trailerURL, setTrailerURL] = useState("");
-  console.log(trailerURL);
-  console.log(movies);
+  // console.log(trailerURL);
+  // console.log(movies);
   const onSuccess = (data) => {
     setMovies(data.data.results);
   };
@@ -43,7 +43,7 @@ const Row = ({ title, fetchURL, isLargeRow }) => {
 
   return (
     <section className="">
-      <h1 className="text-3xl font-bold">{title}</h1>
+      <h1 className="text-xl sm:text-2xl sml:text-3xl font-bold">{title}</h1>
       <div className="container mx-auto flex gap-2 overflow-y-hidden overflow-x-scroll px-2 py-4 scrollbar-hide">
         {movies?.map((movie) => (
           <img
@@ -54,7 +54,7 @@ const Row = ({ title, fetchURL, isLargeRow }) => {
             }`}
             alt={movie.name}
             className={`${
-              isLargeRow ? "h-[250px]" : "h-[125px]"
+              isLargeRow ? "h-[150px] sml:h-[250px]" : "h-[75px] sml:h-[125px]"
             } w-[100%] object-contain rounded-sm hover:scale-120 hover:shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px] duration-300 cursor-pointer`}
           />
         ))}
